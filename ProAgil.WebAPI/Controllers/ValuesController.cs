@@ -12,11 +12,11 @@ namespace ProAgil.WebAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public readonly ProAgilContext Context;
+        public readonly ProAgilContext _context;
 
         public ValuesController(ProAgilContext context)
         {
-            this.Context = context;
+            _context = context;
 
         }
 
@@ -26,7 +26,7 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                List<Evento> results = await this.Context.Eventos.ToListAsync();
+                List<Evento> results = await _context.Eventos.ToListAsync();
 
                 return Ok(results);
             }
@@ -42,7 +42,7 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                Evento results = await this.Context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
+                Evento results = await _context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
 
                 return Ok(results);
             }
