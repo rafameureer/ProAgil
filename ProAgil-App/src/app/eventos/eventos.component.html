@@ -16,7 +16,7 @@
     <tr>
       <th>
         <button class="btn btn-outline-primary" (click)="alternarImagem()">
-          Mostrar Imagem
+          <i class="{{ mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
         </button>
       </th>
       <th>#</th>
@@ -38,12 +38,19 @@
           [style.margin.px]="imagemMargem"
         />
       </td>
-      <td>{{ evento.eventoId }}</td>
+      <td>{{ evento.id }}</td>
       <td>{{ evento.tema }}</td>
       <td>{{ evento.local }}</td>
-      <td>{{ evento.dataEvento }}</td>
+      <td>{{ evento.dataEvento | date: "dd/MM/yyyy hh:mm" }}</td>
       <td>{{ evento.qtdPessoas }}</td>
-      <td>{{ evento.lote | uppercase }}</td>
+      <td>
+        <div *ngIf="!evento.lotes.length">
+          {{ "Não informado" | uppercase }}
+        </div>
+        <div *ngIf="evento.lotes.length">
+          {{ evento.lotes[0].nome | uppercase }}
+        </div>
+      </td>
       <td>
         <button class="btn btn-success"></button>
         <button class="btn btn-danger"></button>
